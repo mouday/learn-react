@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>react-props</title>
+
+    <!-- react 核心库 -->
+    <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script> -->
+    <script src="../js/react.development.js"></script>
+    <!-- react-dom: 用于支持react操作dom -->
+    <!-- <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+    <script src="../js/react-dom.development.js"></script>
+
+    <!-- babel：将jsx转为js -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="../js/babel.min.js"></script>
+  </head>
+
+  <body>
+    <!-- React 容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class Person extends React.Component {
+        render() {
+          const { name, age } = this.props;
+
+          return (
+            <ul>
+              <li>{name}</li>
+              <li>{age}</li>
+            </ul>
+          );
+        }
+      }
+
+      // 渲染到页面
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+      root.render(<Person name="Tom" age="18" />);
+    </script>
+  </body>
+</html>

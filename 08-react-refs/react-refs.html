@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>react-refs</title>
+
+    <!-- react 核心库 -->
+    <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script> -->
+    <script src="../js/react.development.js"></script>
+    <!-- react-dom: 用于支持react操作dom -->
+    <!-- <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+    <script src="../js/react-dom.development.js"></script>
+
+    <!-- babel：将jsx转为js -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="../js/babel.min.js"></script>
+  </head>
+
+  <body>
+    <!-- React 容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class InputComponent extends React.Component {
+        state = {
+          isActive: false,
+        };
+
+        handleInputBlur = () => {
+          // 回调函数形式
+          const { input } = this;
+
+          console.log("handleInputBlur", input.value);
+        };
+
+        handleClick = () => {
+          // 字符串形式
+          const { input } = this.refs;
+
+          console.log("handleClick", input.value);
+
+          // 修改state
+          const { isActive } = this.state;
+
+          this.setState({
+            isActive: !isActive,
+          });
+        };
+
+        saveInput = (input) => {
+          this.input2 = input;
+        };
+
+        handleInputBlur2 = () => {
+          const { input2 } = this;
+
+          console.log("handleClick", input2.value);
+        };
+
+        render() {
+          return (
+            <div>
+              {/* 这是jsx中的注释 */}
+              <input ref="input" type="text" placeholder="点击按钮提示" />
+
+              <button onClick={this.handleClick}>点击显示</button>
+
+              <input
+                ref={(r) => (this.input = r)}
+                onBlur={this.handleInputBlur}
+                type="text"
+                placeholder="失去焦点按钮提示"
+              />
+
+              <input
+                ref={this.saveInput}
+                onBlur={this.handleInputBlur2}
+                type="text"
+                placeholder="失去焦点按钮提示"
+              />
+            </div>
+          );
+        }
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<InputComponent />);
+    </script>
+  </body>
+</html>

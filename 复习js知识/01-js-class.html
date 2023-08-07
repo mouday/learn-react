@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js-class</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        // 构造方法
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+
+        // 普通方法
+        speek() {
+          console.log(`我的名字是:${this.name}, 今年${this.age}岁了`);
+        }
+      }
+
+      // 继承
+      class Student extends Person {
+  
+        // 需要先调用super
+        constructor(name, age, grade) {
+          super(name, age);
+          this.grade = grade;
+        }
+
+        // 覆写父类方法
+        speek() {
+          console.log(
+            `我的名字是:${this.name}, 今年${this.age}岁了, 我的年级是:${this.grade}`
+          );
+        }
+
+        study() {
+          console.log("我在学校学习");
+        }
+      }
+
+      const p = new Person("张三", 18);
+      p.speek();
+      // 我的名字是:张三, 今年18岁了
+
+      const s = new Student("李四", 19, 2);
+      s.speek();
+      // 我的名字是:李四, 今年19岁了, 我的年级是:2
+      s.study();
+      // 我在学校学习
+    </script>
+  </body>
+</html>

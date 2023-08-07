@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js展开运算符</title>
+  </head>
+  <body>
+    <script>
+      const arr1 = [1, 2, 3];
+
+      // 1、展开数组
+      console.log(arr1); // (3) [1, 2, 3]
+      console.log(...arr1); // 1 2 3
+
+      // 2、合并数组
+      const arr2 = [4, 5, 6];
+      const arr3 = [...arr1, ...arr2];
+      console.log(arr3); // (6) [1, 2, 3, 4, 5, 6]
+
+      // 3、函数中接收不确定个数的参数
+      function sum(...arr) {
+        return arr.reduce((preValue, currentValue) => {
+          return preValue + currentValue;
+        });
+      }
+
+      console.log(sum(1, 2, 3, 4, 5, 6)); // 21
+
+      // 4、对象复制
+      const obj1 = { name: "Tom", age: 18 };
+      const obj2 = { ...obj1 };
+      console.log(obj2); // {name: 'Tom', age: 18}
+
+      // 5、对象合并
+      const obj3 = { ...obj1, name: "Jerry" };
+      console.log(obj3); // {name: 'Jerry', age: 18}
+    </script>
+  </body>
+</html>

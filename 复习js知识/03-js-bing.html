@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>this指向</title>
+  </head>
+  <body>
+    <script>
+      function foo() {
+        console.log(this);
+      }
+
+      foo(); // Window
+
+      // 返回一个新的函数
+      const foo2 = foo.bind({ name: "Tom" });
+      foo2(); // {name: 'Tom'}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        // 静态属性，类属性
+        static name = "Tom";
+        // 实例属性
+        age = 18;
+      }
+
+      console.log(Person.name); // Tom
+      console.log(Person.age); // undefined
+      
+      const person = new Person();
+      console.log(person.name); // undefined
+      console.log(person.age); // 18
+    </script>
+  </body>
+</html>

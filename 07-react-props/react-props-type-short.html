@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>react-props-type</title>
+
+    <!-- react 核心库 -->
+    <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script> -->
+    <script src="../js/react.development.js"></script>
+    <!-- react-dom: 用于支持react操作dom -->
+    <!-- <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+    <script src="../js/react-dom.development.js"></script>
+
+    <!-- development version -->
+    <!-- <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script> -->
+    <script src="../js/prop-types.js"></script>
+
+    <!-- babel：将jsx转为js -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="../js/babel.min.js"></script>
+  </head>
+
+  <body>
+    <!-- React 容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class Person extends React.Component {
+        // 类型限制
+        static propTypes = {
+          name: PropTypes.string.isRequired, // 字符串，必传
+          age: PropTypes.number, // 数字
+          sex: PropTypes.string, // 字符串
+          speek: PropTypes.func, // 函数
+        };
+
+        // 默认值
+        static defaultProps = {
+          sex: "男",
+          age: 18,
+        };
+
+        render() {
+          const { name, age, sex } = this.props;
+
+          return (
+            <ul>
+              <li>{name}</li>
+              <li>{age}</li>
+              <li>{sex}</li>
+            </ul>
+          );
+        }
+      }
+
+      // 渲染到页面
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+      root.render(<Person name="Tom" age={18} />);
+      // root.render(<Person {...data} />);
+    </script>
+  </body>
+</html>
