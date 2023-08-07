@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>柯里化函数优化表单接收数据</title>
+
+    <!-- react 核心库 -->
+    <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script> -->
+    <script src="../js/react.development.js"></script>
+    <!-- react-dom: 用于支持react操作dom -->
+    <!-- <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+    <script src="../js/react-dom.development.js"></script>
+
+    <!-- babel：将jsx转为js -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="../js/babel.min.js"></script>
+  </head>
+
+  <body>
+    <!-- React 容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class InputComponent extends React.Component {
+        state = {
+          username: "",
+          password: "",
+        };
+
+        // 保存用户名
+        handleDataChange = (name) => {
+          return (event) => {
+            this.setState({
+              [name]: event.target.value,
+            });
+          };
+        };
+
+        // 提交表单
+        handleSubmit = (event) => {
+          event.preventDefault(); // 阻止默认行为
+
+          let data = {
+            username: this.state.username,
+            password: this.state.password,
+          };
+
+          console.log(data);
+        };
+
+        render() {
+          return (
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                用户名
+                <input
+                  onChange={this.handleDataChange("username")}
+                  type="text"
+                  placeholder="用户名"
+                />
+              </label>
+
+              <label>
+                密码
+                <input
+                  onChange={this.handleDataChange("password")}
+                  type="password"
+                  placeholder="密码"
+                />
+              </label>
+              <button>提交</button>
+            </form>
+          );
+        }
+      }
+
+      // 渲染组件
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<InputComponent />);
+    </script>
+  </body>
+</html>
