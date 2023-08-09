@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>04-component-life-new</title>
+
+    <!-- react 核心库 -->
+    <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script> -->
+    <script src="../js/react.development.js"></script>
+    <!-- react-dom: 用于支持react操作dom -->
+    <!-- <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+    <script src="../js/react-dom.development.js"></script>
+
+    <!-- babel：将jsx转为js -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="../js/babel.min.js"></script>
+  </head>
+
+  <body>
+    <!-- React 容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class MyComponent extends React.Component {
+        state = {
+          count: 0,
+        };
+
+        constructor(props) {
+          super(props);
+          console.log("constructor", props);
+        }
+
+        handleClick = () => {
+          const { count } = this.state;
+
+          this.setState({
+            count: count + 1,
+          });
+        };
+
+        // state的值任何时候都取决于props
+        static getDerivedStateFromProps(props, state) {
+          console.log("getDerivedStateFromProps", props, state);
+          return null;
+        }
+
+        // 控制组件更新的阀门
+        shouldComponentUpdate(nextProps, nextState) {
+          console.log("shouldComponentUpdate", nextProps, nextState);
+          return true;
+        }
+
+        // 获取更新之前的快照
+        getSnapshotBeforeUpdate(prevProps, prevState) {
+          console.log("getSnapshotBeforeUpdate", prevProps, prevState);
+          return null;
+        }
+
+        // 组件更新完毕
+        componentDidUpdate(prevProps, prevState, snapshot) {
+          console.log("componentDidUpdate", prevProps, prevState, snapshot);
+        }
+
+        // 组件挂载完毕
+        componentDidMount() {
+          console.log("componentDidMount");
+        }
+
+        // 组件将要卸载
+        componentWillUnmount(){
+          console.log("componentWillUnmount");
+        }
+
+        render() {
+          console.log("render");
+
+          const { count } = this.state;
+
+          return (
+            <div>
+              <div>{count}</div>
+              <button onClick={this.handleClick}>更新</button>
+            </div>
+          );
+        }
+      }
+
+      // 渲染组件
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<MyComponent age={19} />);
+    </script>
+  </body>
+</html>

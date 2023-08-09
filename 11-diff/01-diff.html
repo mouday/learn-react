@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>component-life</title>
+
+    <!-- react 核心库 -->
+    <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script> -->
+    <script src="../js/react.development.js"></script>
+    <!-- react-dom: 用于支持react操作dom -->
+    <!-- <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+    <script src="../js/react-dom.development.js"></script>
+
+    <!-- babel：将jsx转为js -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="../js/babel.min.js"></script>
+  </head>
+
+  <body>
+    <!-- React 容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class LifeComponent extends React.Component {
+        state = {
+          list: [
+            {
+              id: 1,
+              name: "张三",
+              age: 18,
+            },
+            {
+              id: 2,
+              name: "李四",
+              age: 20,
+            },
+          ],
+        };
+
+        // 更新数据
+        handleAddClick = () => {
+          let { list } = this.state;
+          let item = {
+            id: 3,
+            name: "王五",
+            age: 22,
+          };
+
+          this.setState({
+            list: [item, ...list],
+          });
+        };
+
+        render() {
+          console.log("render");
+          const { list } = this.state;
+
+          return (
+            <div>
+              <h2>元素key</h2>
+              <button onClick={this.handleAddClick}>+1</button>
+
+              <h3>用index索引值作为key</h3>
+              <ul>
+                {list.map((item, index) => {
+                  return (
+                    <li key={index}>
+                      {item.name} - {item.age}
+                      <input type="text"/>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <br />
+
+              <h3>用id数据唯一值作为key</h3>
+              <ul>
+                {list.map((item) => {
+                  return (
+                    <li key={item.id}>
+                      {item.name} - {item.age}
+                      <input type="text"/>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        }
+      }
+
+      // 渲染组件
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<LifeComponent />);
+    </script>
+  </body>
+</html>

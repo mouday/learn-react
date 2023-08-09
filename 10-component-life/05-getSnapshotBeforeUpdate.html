@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>04-component-life-new</title>
+
+    <!-- react 核心库 -->
+    <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script> -->
+    <script src="../js/react.development.js"></script>
+    <!-- react-dom: 用于支持react操作dom -->
+    <!-- <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+    <script src="../js/react-dom.development.js"></script>
+
+    <!-- babel：将jsx转为js -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="../js/babel.min.js"></script>
+  </head>
+
+  <body>
+    <style>
+      .list {
+        height: 150px;
+        overflow: auto;
+        background-color: #76c56a;
+      }
+
+      .item {
+        line-height: 30px;
+      }
+    </style>
+    <!-- React 容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class MyComponent extends React.Component {
+        state = {
+          list: [],
+        };
+
+        constructor(props) {
+          super(props);
+          this.timer = null;
+          this.listRef = React.createRef();
+        }
+
+        // 获取更新之前的快照
+        getSnapshotBeforeUpdate(prevProps, prevState) {
+          console.log("getSnapshotBeforeUpdate", prevProps, prevState);
+
+          return {
+            scrollHeight: this.listRef.current.scrollHeight,
+          };
+        }
+
+        // 组件更新完毕
+        componentDidUpdate(prevProps, prevState, snapshot) {
+          console.log("componentDidUpdate", prevProps, prevState, snapshot);
+          this.listRef.current.scrollTop +=
+            this.listRef.current.scrollHeight - snapshot.scrollHeight;
+        }
+
+        // 组件挂载完毕
+        componentDidMount() {
+          this.timer = setInterval(() => {
+            const { list } = this.state;
+
+            let item = "文章：" + (list.length + 1);
+
+            this.setState({
+              list: [item, ...list],
+            });
+          }, 1000);
+        }
+
+        // 组件将要卸载
+        componentWillUnmount() {
+          console.log("componentWillUnmount");
+          clearTimeout(this.timer);
+          this.timer = null;
+        }
+
+        render() {
+          console.log("render");
+
+          const { list } = this.state;
+
+          return (
+            <div className="list" ref={this.listRef}>
+              {list.map((item, index) => {
+                return (
+                  <div key={index} className="item">
+                    {item}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        }
+      }
+
+      // 渲染组件
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<MyComponent />);
+    </script>
+  </body>
+</html>
