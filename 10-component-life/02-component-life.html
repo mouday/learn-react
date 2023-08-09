@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>component-life</title>
+
+    <!-- react 核心库 -->
+    <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script> -->
+    <script src="../js/react.development.js"></script>
+    <!-- react-dom: 用于支持react操作dom -->
+    <!-- <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+    <script src="../js/react-dom.development.js"></script>
+
+    <!-- babel：将jsx转为js -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="../js/babel.min.js"></script>
+  </head>
+
+  <body>
+    <!-- React 容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class LifeComponent extends React.Component {
+        constructor(props) {
+          super(props);
+          console.log("constructor");
+
+          this.state = {
+            count: 0,
+          };
+        }
+
+        // 更新数据
+        handleAddClick = () => {
+          console.log("handleAddClick");
+          let { count } = this.state;
+          count += 1;
+          this.setState({ count });
+        };
+
+        // 强制更新
+        handleForceClick = () => {
+          console.log("handleForceClick");
+
+          this.forceUpdate()
+        };
+
+        // 组件将要挂载
+        componentWillMount() {
+          console.log("componentDidMount");
+        }
+
+        // 组件挂载完成
+        componentDidMount() {
+          console.log("componentDidMount");
+        }
+
+        // 组件是否需要更新：阀门
+        shouldComponentUpdate() {
+          console.log("shouldComponentUpdate");
+          return true
+        }
+
+        // 组件将要更新
+        componentWillUpdate() {
+          console.log("componentWillUpdate");
+        }
+
+        // 组件更新完成
+        componentDidUpdate() {
+          console.log("componentDidUpdate");
+        }
+
+        // 组件即将卸载
+        componentWillUnmount() {
+          console.log("componentWillUnmount");
+        }
+
+        render() {
+          console.log("render");
+          const { count } = this.state;
+
+          return (
+            <div>
+              <h2>{count}</h2>
+              <button onClick={this.handleAddClick}>+1</button>
+              <button onClick={this.handleForceClick}>强制更新</button>
+            </div>
+          );
+        }
+      }
+
+      // 渲染组件
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<LifeComponent />);
+    </script>
+  </body>
+</html>

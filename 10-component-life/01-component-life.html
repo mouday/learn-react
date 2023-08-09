@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>component-life</title>
+
+    <!-- react 核心库 -->
+    <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script> -->
+    <script src="../js/react.development.js"></script>
+    <!-- react-dom: 用于支持react操作dom -->
+    <!-- <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+    <script src="../js/react-dom.development.js"></script>
+
+    <!-- babel：将jsx转为js -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="../js/babel.min.js"></script>
+  </head>
+
+  <body>
+    <!-- React 容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class LifeComponent extends React.Component {
+        handleUnmount = () => {
+          console.log("handleUnmount");
+          ReactDOM.unmountComponentAtNode(this);
+        };
+
+        // 组件挂载完成
+        componentDidMount() {
+          console.log("componentDidMount");
+        }
+
+        // 组件即将卸载
+        componentWillUnmount() {
+          console.log("componentWillUnmount");
+        }
+
+        render() {
+          return (
+            <div>
+              <h2>Hello</h2>
+              <button onClick={this.handleUnmount}>卸载组件</button>
+            </div>
+          );
+        }
+      }
+
+      // 渲染组件
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<LifeComponent />);
+    </script>
+  </body>
+</html>

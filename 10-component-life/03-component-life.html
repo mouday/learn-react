@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>component-life</title>
+
+    <!-- react 核心库 -->
+    <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script> -->
+    <script src="../js/react.development.js"></script>
+    <!-- react-dom: 用于支持react操作dom -->
+    <!-- <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+    <script src="../js/react-dom.development.js"></script>
+
+    <!-- babel：将jsx转为js -->
+    <!-- <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> -->
+    <script src="../js/babel.min.js"></script>
+  </head>
+
+  <body>
+    <!-- React 容器 -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      class ParentComponent extends React.Component {
+        state = {
+          count: 0,
+        };
+
+        handleClick = () => {
+          const { count } = this.state;
+
+          this.setState({
+            count: count + 1,
+          });
+        };
+
+        render() {
+          const { count } = this.state;
+
+          return (
+            <div>
+              <ChildComponent count={count}></ChildComponent>
+              <button onClick={this.handleClick}>更新</button>
+            </div>
+          );
+        }
+      }
+
+      class ChildComponent extends React.Component {
+        // 接收父组件的数据更新
+        componentWillReceiveProps() {
+          console.log("componentWillReceiveProps");
+        }
+
+        // 组件将要挂载
+        componentWillMount() {
+          console.log("componentDidMount");
+        }
+
+        // 组件挂载完成
+        componentDidMount() {
+          console.log("componentDidMount");
+        }
+
+        // 组件是否需要更新：阀门
+        shouldComponentUpdate() {
+          console.log("shouldComponentUpdate");
+          return true;
+        }
+
+        // 组件将要更新
+        componentWillUpdate() {
+          console.log("componentWillUpdate");
+        }
+
+        // 组件更新完成
+        componentDidUpdate() {
+          console.log("componentDidUpdate");
+        }
+
+        // 组件即将卸载
+        componentWillUnmount() {
+          console.log("componentWillUnmount");
+        }
+
+        render() {
+          console.log("render");
+          const { count } = this.props;
+
+          return (
+            <div>
+              <h2>{count}</h2>
+            </div>
+          );
+        }
+      }
+
+      // 渲染组件
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<ParentComponent />);
+    </script>
+  </body>
+</html>
