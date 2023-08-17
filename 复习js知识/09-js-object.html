@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js连续解构赋值</title>
+  </head>
+  <body>
+    <script>
+      const obj = { a: { b: { c: "1" } } };
+      const {a: {b: { c: data }}} = obj;
+      console.log(data); // 1
+    </script>
+  </body>
+</html>
