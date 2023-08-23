@@ -1,20 +1,25 @@
 import React, { Component } from "react";
-import store from "./store.js";
+import store from "./store/index.js";
+import { increment, decrement, incrementAsync } from "./store/actions.js";
 
 export default class App extends Component {
   handleIncrement = () => {
-    store.dispatch({ type: "INCREMENT" });
+    store.dispatch(increment());
   };
 
   handleDecrement = () => {
-    store.dispatch({ type: "DECREMENT" });
+    store.dispatch(decrement());
   };
 
-  componentDidMount() {
-    store.subscribe(() => {
-      this.forceUpdate();
-    });
-  }
+  handleIncrementAsync = () => {
+    store.dispatch(incrementAsync(500));
+  };
+
+  // componentDidMount() {
+  //   store.subscribe(() => {
+  //     this.forceUpdate();
+  //   });
+  // }
 
   render() {
     return (
@@ -22,6 +27,7 @@ export default class App extends Component {
         <div>{store.getState()}</div>
         <button onClick={this.handleIncrement}>increment</button>
         <button onClick={this.handleDecrement}>decrement</button>
+        <button onClick={this.handleIncrementAsync}>异步increment</button>
       </div>
     );
   }

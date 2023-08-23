@@ -9,6 +9,7 @@ specifiers:
   react-router-dom: '5'
   react-scripts: 5.0.1
   redux: ^4.2.1
+  redux-thunk: ^2.4.2
   web-vitals: ^2.1.4
 
 dependencies:
@@ -20,6 +21,7 @@ dependencies:
   react-router-dom: 5.3.4_react@18.2.0
   react-scripts: 5.0.1_react@18.2.0
   redux: 4.2.1
+  redux-thunk: 2.4.2_redux@4.2.1
   web-vitals: 2.1.4
 
 packages:
@@ -8706,6 +8708,14 @@ packages:
     dependencies:
       indent-string: 4.0.0
       strip-indent: 3.0.0
+    dev: false
+
+  /redux-thunk/2.4.2_redux@4.2.1:
+    resolution: {integrity: sha512-+P3TjtnP0k/FEjcBL5FZpoovtvrTNT/UXd4/sluaSyrURlSlhLSzEdfsTBW7WsKB6yPvgd7q/iZPICFjW4o57Q==}
+    peerDependencies:
+      redux: ^4
+    dependencies:
+      redux: 4.2.1
     dev: false
 
   /redux/4.2.1:
