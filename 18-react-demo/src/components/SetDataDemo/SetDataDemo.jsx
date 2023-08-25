@@ -20,6 +20,11 @@ export default class SetDataDemo extends Component {
     );
 
     console.log("after", this.state.count);
+
+    // 输出结果：
+    // before 0
+    // after 0
+    // callback 1
   };
 
   render() {
